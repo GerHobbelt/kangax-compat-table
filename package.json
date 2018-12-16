@@ -1,6 +1,6 @@
 {
-  "name": "compat-table",
-  "version": "0.0.0",
+  "name": "@gerhobbelt/kangax-compat-table",
+  "version": "1.0.0-1",
   "main": "node.js",
   "engine": {
     "node": ">= 0.11.12",
@@ -8,9 +8,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/kangax/compat-table.git"
+    "url": "git://github.com/GerHobbelt/kangax-compat-table.git"
   },
-  "private": true,
   "dependencies": {
     "babel-core": "latest",
     "babel-polyfill": "latest",
@@ -18,8 +17,8 @@
     "babel-preset-es2016": "latest",
     "babel-preset-es2017": "latest",
     "babel-preset-stage-0": "latest",
-    "chalk": "^1.1.3",
-    "cheerio": "^0.20.0",
+    "chalk": "^2.4.1",
+    "cheerio": "^1.0.0-rc.2",
     "core-js": "latest",
     "es5-shim": "latest",
     "es6-shim": "latest",
@@ -28,11 +27,11 @@
     "esdown": "latest",
     "espree": "latest",
     "esprima": "latest",
-    "google-closure-compiler-js": "^20170521.0.0",
+    "google-closure-compiler-js": "^20181210.0.0",
     "jshint": "latest",
     "jstransform": "latest",
     "lodash.pickby": "^4.6.0",
-    "object.assign": "^4.0.4",
+    "object.assign": "^4.1.0",
     "traceur": "latest",
     "typescript": "latest"
   },
@@ -43,7 +42,8 @@
     "build:compilers": "node build.js compilers",
     "git:clean": "if type git > /dev/null 2>&1; then git stash save --keep-index; fi",
     "test:no_change": "npm run --silent git:clean && if npm run --silent build | grep 'Write to file'; then echo 'Please run `npm run build` and commit the changes.' && exit 1; fi",
-    "graalvm": "node --jvm --shared-array-buffer --intl-402 node.js"
+    "graalvm": "node --jvm --shared-array-buffer --intl-402 node.js",
+    "pub": "npm publish --access public" 
   },
   "config": {
     "unsafe-perm": true
