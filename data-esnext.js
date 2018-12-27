@@ -2445,6 +2445,36 @@ exports.tests = [
         graalvm: false,
       }
     },
+    {
+      name: 'Set.prototype.isDisjointWith',
+      exec: function () {/*
+        return new Set([1, 2, 3]).isDisjointWith([4, 5, 6]);
+      */},
+      res: {
+        firefox2: false,
+        graalvm: false,
+      }
+    },
+    {
+      name: 'Set.prototype.isSubsetOf',
+      exec: function () {/*
+        return new Set([1, 2, 3]).isSubsetOf([5, 4, 3, 2, 1]);
+      */},
+      res: {
+        firefox2: false,
+        graalvm: false,
+      }
+    },
+    {
+      name: 'Set.prototype.isSupersetOf',
+      exec: function () {/*
+        return new Set([5, 4, 3, 2, 1]).isSupersetOf([1, 2, 3]);
+      */},
+      res: {
+        firefox2: false,
+        graalvm: false,
+      }
+    },
   ]
 },
 {
@@ -2482,12 +2512,78 @@ exports.tests = [
       }
     },
     {
+      name: 'Map.prototype.deleteAll',
+      exec: function () {/*
+        var map = new Map([[1, 2], [3, 4], [5, 6], [7, 8]]);
+        map.deleteAll(1, 5)
+        return map.size === 2
+          && map.get(3) === 4
+          && map.get(7) === 8;
+      */},
+      res: {
+        firefox52: false,
+        graalvm: false,
+      }
+    },
+    {
+      name: 'Map.prototype.every',
+      exec: function () {/*
+        return new Map([[1, 4], [2, 5], [3, 6]]).every(it => typeof it == 'number');
+      */},
+      res: {
+        firefox52: false,
+        graalvm: false,
+      }
+    },
+    {
       name: 'Map.prototype.filter',
       exec: function () {/*
         var map = new Map([[1, 4], [2, 5], [3, 6]]).filter(it => !(it % 2));
         return map.size === 2
           && map.get(1) === 4
           && map.get(3) === 6;
+      */},
+      res: {
+        firefox52: false,
+        graalvm: false,
+      }
+    },
+    {
+      name: 'Map.prototype.find',
+      exec: function () {/*
+        return new Map([[1, 2], [2, 3], [3, 4]]).find(it => it % 2) === 3;
+      */},
+      res: {
+        firefox52: false,
+        graalvm: false,
+      }
+    },
+    {
+      name: 'Map.prototype.findKey',
+      exec: function () {/*
+        return new Map([[1, 2], [2, 3], [3, 4]]).findKey(it => it % 2) === 2;
+      */},
+      res: {
+        firefox52: false,
+        graalvm: false,
+      }
+    },
+    {
+      name: 'Map.prototype.includes',
+      exec: function () {/*
+        return new Map([[1, 2], [2, NaN]]).includes(2)
+          && new Map([[1, 2], [2, NaN]]).includes(NaN);
+      */},
+      res: {
+        firefox52: false,
+        graalvm: false,
+      }
+    },
+    {
+      name: 'Map.prototype.keyOf',
+      exec: function () {/*
+        return new Map([[1, 2], [2, NaN]]).keyOf(2) === 1
+          && new Map([[1, 2], [2, NaN]]).keyOf(NaN) === undefined;
       */},
       res: {
         firefox52: false,
@@ -2530,6 +2626,26 @@ exports.tests = [
           && map.get(1) === 4
           && map.get(2) === 7
           && map.get(3) === 6;
+      */},
+      res: {
+        firefox52: false,
+        graalvm: false,
+      }
+    },
+    {
+      name: 'Map.prototype.reduce',
+      exec: function () {/*
+        return new Map([['a', 1], ['b', 2], ['c', 3], ]).reduce(((a, b) => a + b), 1) === 7;
+      */},
+      res: {
+        firefox52: false,
+        graalvm: false,
+      }
+    },
+    {
+      name: 'Map.prototype.some',
+      exec: function () {/*
+        return new Map([[1, 4], [2, 5], [3, 6]]).some(it => it % 2);
       */},
       res: {
         firefox52: false,
@@ -2641,6 +2757,63 @@ exports.tests = [
         graalvm: false,
       }
     },
+    {
+      name: 'WeakMap.prototype.deleteAll',
+      exec: function () {/*
+        var a = {};
+        var b = {};
+        var c = {};
+        var d = {};
+        var map = new WeakMap([[a, 1], [b, 2], [c, 3], [d, 4]]);
+        map.deleteAll(a, c)
+        return !map.has(a)
+          && map.get(b) === 2
+          && !map.has(c)
+          && map.get(d) === 4;
+      */},
+      res: {
+        firefox52: false,
+        graalvm: false,
+      }
+    },
+    {
+      name: 'WeakSet.prototype.addAll',
+      exec: function () {/*
+        var a = {};
+        var b = {};
+        var c = {};
+        var d = {};
+        var set = new WeakSet([a, b]);
+        set.addAll(c, d)
+        return set.has(a)
+          && set.has(b)
+          && set.has(c)
+          && set.has(d);
+      */},
+      res: {
+        firefox52: false,
+        graalvm: false,
+      }
+    },
+    {
+      name: 'WeakSet.prototype.deleteAll',
+      exec: function () {/*
+        var a = {};
+        var b = {};
+        var c = {};
+        var d = {};
+        var set = new WeakSet([a, b, c, d]);
+        set.deleteAll(a, c)
+        return !set.has(a)
+          && set.has(b)
+          && !set.has(c)
+          && set.has(d);
+      */},
+      res: {
+        firefox52: false,
+        graalvm: false,
+      }
+    },
   ]
 },
 {
@@ -2697,6 +2870,71 @@ exports.tests = [
         firefox52: false,
         chrome70: false,
         safari12: false,
+      },
+    },
+  ]
+},
+{
+  name: 'Promise.allSettled',
+  category: STAGE1,
+  significance: 'small',
+  spec: 'https://github.com/tc39/proposal-promise-allSettled',
+  exec: function () {/*
+    Promise.allSettled([
+      Promise.resolve(1),
+      Promise.reject(2),
+      Promise.resolve(3)
+    ]).then(it => {
+      if (
+        it.length === 3 &&
+        it[0].status === 'fulfilled' && it[0].value === 1 &&
+        it[1].status === 'rejected' && it[1].reason === 2 &&
+        it[2].status === 'fulfilled' && it[2].value === 3
+      ) asyncTestPassed();
+    });
+  */},
+  res: {
+  }
+},
+{
+  name: 'Math.seededPRNG',
+  significance: 'small',
+  spec: 'https://github.com/tc39/proposal-seeded-random',
+  category: STAGE1,
+  exec: function () {/*
+    var gen1 = Math.seededPRNG({ seed: 42 });
+    var gen2 = Math.seededPRNG({ seed: 42 });
+    if (!gen1.next || !gen1[Symbol.iterator]) return false;
+    var first = gen1.next().value;
+    if (first < 0 || first > 1) return false;
+    if (first !== gen2.next().value) return false;
+    var second = gen1.next().value;
+    if (first === second) return false;
+    return second === gen2.next().value;
+  */},
+  res: {
+  }
+},
+{
+  name: '{ BigInt, Number }.fromString',
+  category: STAGE1,
+  significance: 'small',
+  spec: 'https://github.com/tc39/proposal-number-fromstring',
+  subtests: [
+    {
+      name: 'Number.fromString',
+      exec: function () {/*
+        return Number.fromString('42') === 42;
+      */},
+      res: {
+      },
+    },
+    {
+      name: 'BigInt.fromString',
+      exec: function () {/*
+        return BigInt.fromString('42') === 42n;
+      */},
+      res: {
       },
     },
   ]
