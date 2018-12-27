@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/kangax-compat-table",
-  "version": "1.0.0-2",
+  "version": "1.0.0-4",
   "main": "node.js",
   "engine": {
     "node": ">= 0.11.12",
