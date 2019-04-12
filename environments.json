@@ -19,9 +19,9 @@
       "esnext"
     ]
   },
-  "babel6": {
+  "babel6corejs2": {
     "full": "Babel 6.5 + core-js 2.5",
-    "short": "Babel 6 +<br><nobr>core-js</nobr>",
+    "short": "Babel 6 +<br><nobr>core-js 2</nobr>",
     "family": "Babel",
     "platformtype": "compiler",
     "obsolete": false,
@@ -31,11 +31,24 @@
       "esnext"
     ]
   },
-  "babel7": {
-    "full": "Babel 7 beta + core-js 2.5",
-    "short": "Babel 7 +<br><nobr>core-js</nobr>",
+  "babel7corejs2": {
+    "full": "Babel 7 + core-js 2.5",
+    "short": "Babel 7 +<br><nobr>core-js 2</nobr>",
     "family": "Babel",
     "platformtype": "compiler",
+    "obsolete": false,
+    "test_suites": [
+      "es6",
+      "es2016plus",
+      "esnext"
+    ]
+  },
+  "babel7corejs3": {
+    "full": "Babel 7 + core-js 3",
+    "short": "Babel 7 +<br><nobr>core-js 3</nobr>",
+    "family": "Babel",
+    "platformtype": "compiler",
+    "obsolete": false,
     "unstable": true,
     "test_suites": [
       "es6",
@@ -184,9 +197,9 @@
       "es6"
     ]
   },
-  "typescript1": {
+  "typescript1corejs2": {
     "full": "TypeScript 1.8 + core-js 2.5",
-    "short": "Type-<br />Script +<br /><nobr>core-js</nobr>",
+    "short": "Type-<br />Script +<br /><nobr>core-js 2</nobr>",
     "family": "TypeScript",
     "platformtype": "compiler",
     "release": "2016-02-22",
@@ -197,9 +210,9 @@
       "esnext"
     ]
   },
-  "typescript2": {
+  "typescript2corejs2": {
     "full": "TypeScript 2.0 + core-js 2.5",
-    "short": "Type-<br />Script +<br /><nobr>core-js</nobr>",
+    "short": "Type-<br />Script +<br /><nobr>core-js 2</nobr>",
     "family": "TypeScript",
     "platformtype": "compiler",
     "release": "2016-09-22",
@@ -210,9 +223,9 @@
       "esnext"
     ]
   },
-  "typescript2_1": {
+  "typescript2_1corejs2": {
     "full": "TypeScript 2.1 + core-js 2.5",
-    "short": "Type-<br />Script +<br /><nobr>core-js</nobr>",
+    "short": "Type-<br />Script +<br /><nobr>core-js 2</nobr>",
     "family": "TypeScript",
     "platformtype": "compiler",
     "release": "2016-12-07",
@@ -223,9 +236,9 @@
       "esnext"
     ]
   },
-  "typescript2_2": {
+  "typescript2_2corejs2": {
     "full": "TypeScript 2.2 + core-js 2.5",
-    "short": "Type-<br />Script +<br /><nobr>core-js</nobr>",
+    "short": "Type-<br />Script +<br /><nobr>core-js 2</nobr>",
     "family": "TypeScript",
     "platformtype": "compiler",
     "release": "2017-02-22",
@@ -236,9 +249,9 @@
       "esnext"
     ]
   },
-  "typescript2_3": {
+  "typescript2_3corejs2": {
     "full": "TypeScript 2.3 + core-js 2.5",
-    "short": "Type-<br />Script +<br /><nobr>core-js</nobr>",
+    "short": "Type-<br />Script +<br /><nobr>core-js 2</nobr>",
     "family": "TypeScript",
     "platformtype": "compiler",
     "release": "2017-04-27",
@@ -249,9 +262,9 @@
       "esnext"
     ]
   },
-  "typescript2_4": {
+  "typescript2_4corejs2": {
     "full": "TypeScript 2.4 + core-js 2.5",
-    "short": "Type-<br />Script +<br /><nobr>core-js</nobr>",
+    "short": "Type-<br />Script +<br /><nobr>core-js 2</nobr>",
     "family": "TypeScript",
     "platformtype": "compiler",
     "release": "2017-06-27",
@@ -262,9 +275,9 @@
       "esnext"
     ]
   },
-  "typescript2_5": {
+  "typescript2_5corejs2": {
     "full": "TypeScript 2.5 + core-js 2.5",
-    "short": "Type-<br />Script +<br /><nobr>core-js</nobr>",
+    "short": "Type-<br />Script +<br /><nobr>core-js 2</nobr>",
     "family": "TypeScript",
     "platformtype": "compiler",
     "release": "2017-08-31",
@@ -275,9 +288,9 @@
       "esnext"
     ]
   },
-  "typescript2_6": {
+  "typescript2_6corejs2": {
     "full": "TypeScript 2.6 + core-js 2.5",
-    "short": "Type-<br />Script +<br /><nobr>core-js</nobr>",
+    "short": "Type-<br />Script +<br /><nobr>core-js 2</nobr>",
     "family": "TypeScript",
     "platformtype": "compiler",
     "release": "2017-10-31",
@@ -288,9 +301,9 @@
       "esnext"
     ]
   },
-  "typescript2_7": {
+  "typescript2_7corejs2": {
     "full": "TypeScript 2.7 + core-js 2.5",
-    "short": "Type-<br />Script +<br /><nobr>core-js</nobr>",
+    "short": "Type-<br />Script +<br /><nobr>core-js 2</nobr>",
     "family": "TypeScript",
     "platformtype": "compiler",
     "release": "2018-01-31",
@@ -301,9 +314,9 @@
       "esnext"
     ]
   },
-  "typescript2_8": {
+  "typescript2_8corejs2": {
     "full": "TypeScript 2.8 + core-js 2.5",
-    "short": "Type-<br />Script +<br /><nobr>core-js</nobr>",
+    "short": "Type-<br />Script +<br /><nobr>core-js 2</nobr>",
     "family": "TypeScript",
     "platformtype": "compiler",
     "release": "2018-03-27",
@@ -314,9 +327,9 @@
       "esnext"
     ]
   },
-  "typescript2_9": {
+  "typescript2_9corejs2": {
     "full": "TypeScript 2.9 + core-js 2.5",
-    "short": "Type-<br />Script +<br /><nobr>core-js</nobr>",
+    "short": "Type-<br />Script +<br /><nobr>core-js 2</nobr>",
     "family": "TypeScript",
     "platformtype": "compiler",
     "release": "2018-05-31",
@@ -327,9 +340,9 @@
       "esnext"
     ]
   },
-  "typescript3": {
+  "typescript3corejs2": {
     "full": "TypeScript 3.0 + core-js 2.5",
-    "short": "Type-<br />Script +<br /><nobr>core-js</nobr>",
+    "short": "Type-<br />Script +<br /><nobr>core-js 2</nobr>",
     "family": "TypeScript",
     "platformtype": "compiler",
     "release": "2018-07-30",
@@ -340,9 +353,9 @@
       "esnext"
     ]
   },
-  "typescript3_1": {
+  "typescript3_1corejs2": {
     "full": "TypeScript 3.1 + core-js 2.5",
-    "short": "Type-<br />Script +<br /><nobr>core-js</nobr>",
+    "short": "Type-<br />Script +<br /><nobr>core-js 2</nobr>",
     "family": "TypeScript",
     "platformtype": "compiler",
     "release": "2018-09-28",
@@ -353,13 +366,27 @@
       "esnext"
     ]
   },
-  "typescript3_2": {
+  "typescript3_2corejs2": {
     "full": "TypeScript 3.2 + core-js 2.5",
-    "short": "Type-<br />Script +<br /><nobr>core-js</nobr>",
+    "short": "Type-<br />Script +<br /><nobr>core-js 2</nobr>",
     "family": "TypeScript",
     "platformtype": "compiler",
     "release": "2018-11-29",
     "obsolete": false,
+    "test_suites": [
+      "es6",
+      "es2016plus",
+      "esnext"
+    ]
+  },
+  "typescript3_2corejs3": {
+    "full": "TypeScript 3.2 + core-js 3",
+    "short": "Type-<br />Script +<br /><nobr>core-js 3</nobr>",
+    "family": "TypeScript",
+    "platformtype": "compiler",
+    "release": "2018-11-29",
+    "obsolete": false,
+    "unstable": true,
     "test_suites": [
       "es6",
       "es2016plus",
