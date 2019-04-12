@@ -376,39 +376,6 @@ exports.tests = [
   ]
 },
 {
-  name: 'String.prototype.matchAll',
-  category: STAGE3,
-  significance: 'small',
-  spec: 'https://github.com/tc39/String.prototype.matchAll',
-  exec: function(){/*
-    var iterator = '11a2bb'.matchAll(/(\d)(\D)/g);
-    if(iterator[Symbol.iterator]() !== iterator)return false;
-    var a = '', b = '', c = '', step;
-    while(!(step = iterator.next()).done){
-      a += step.value[0];
-      b += step.value[1];
-      c += step.value[2];
-    }
-    return a === '1a2b'
-      && b === '12'
-      && c === 'ab';
-  */},
-  res: {
-    babel6corejs2: babel.corejs,
-    typescript1corejs2: typescript.corejs,
-    ie11: false,
-    firefox2: false,
-    firefox65: false,
-    firefox66: firefox.nightly,
-    chrome67: false,
-    chrome68: chrome.harmony,
-    chrome74: true,
-    opera10_50: false,
-    duktape2_0: false,
-    graalvm: true,
-  }
-},
-{
   name: 'additional meta properties',
   category: STAGE0,
   significance: 'medium',
@@ -850,6 +817,7 @@ exports.tests = [
         typescript1corejs2: true,
         ie11: false,
         firefox2: false,
+        firefox67: firefox.classFields,
         chrome65: chrome.harmony,
         chrome72: true,
         opera10_50: false,
@@ -875,6 +843,8 @@ exports.tests = [
         ie11: false,
         firefox2: false,
         chrome66: chrome.harmony,
+        chrome74: true,
+        firefox67: firefox.privateClassFields,
         opera10_50: false,
         duktape2_0: false,
         graalvm: false,
@@ -895,11 +865,32 @@ exports.tests = [
         ie11: false,
         firefox2: false,
         chrome66: chrome.harmony,
+        chrome74: true,
+        firefox67: firefox.privateClassFields,
         opera10_50: false,
         duktape2_0: false,
         graalvm: false,
       }
-    }
+    },
+    {
+      name: 'computed instance class fields',
+      exec: function () {/*
+        class C {
+          ['x'] = 42;
+        }
+        return new C().x === 42;
+      */},
+      res: {
+        ie11: false,
+        firefox2: false,
+        chrome73: true,
+        firefox66: false,
+        firefox68: firefox.classFields,
+        opera10_50: false,
+        duktape2_0: false,
+        graalvm: false,
+      }
+    },
   ]
 },
 {
@@ -941,12 +932,29 @@ exports.tests = [
       */},
       res: {
         firefox2: false,
-        chrome74: chrome.harmony,
+        chrome74: true,
         opera10_50: false,
         duktape2_0: false,
         graalvm: false,
       }
-    }
+    },
+    {
+      name: 'computed static class fields',
+      exec: function () {/*
+        class C {
+          static ['x'] = 42;
+        }
+        return C.x === 42;
+      */},
+      res: {
+        firefox2: false,
+        chrome73: true,
+        firefox66: false,
+        opera10_50: false,
+        duktape2_0: false,
+        graalvm: false,
+      }
+    },
   ]
 },
 {
@@ -1876,7 +1884,7 @@ exports.tests = [
 {
   name: 'numeric separators',
   spec: 'https://github.com/tc39/proposal-numeric-separator',
-  category: STAGE2,
+  category: STAGE3,
   significance: 'small',
   exec: function(){/*
     return 1_000_000.000_001 === 1000000.000001 &&
@@ -2036,6 +2044,8 @@ exports.tests = [
       */},
       res: {
         firefox52: false,
+        firefox67: firefox.bigint,
+        firefox68: firefox.nightly,
         chrome67: true,
         graalvm: true,
       },
@@ -2047,6 +2057,8 @@ exports.tests = [
       */},
       res: {
         firefox52: false,
+        firefox67: firefox.bigint,
+        firefox68: firefox.nightly,
         chrome67: true,
         graalvm: true,
       },
@@ -2058,6 +2070,8 @@ exports.tests = [
       */},
       res: {
         firefox52: false,
+        firefox67: firefox.bigint,
+        firefox68: firefox.nightly,
         chrome67: true,
         graalvm: true,
       },
@@ -2069,6 +2083,8 @@ exports.tests = [
       */},
       res: {
         firefox52: false,
+        firefox67: firefox.bigint,
+        firefox68: firefox.nightly,
         chrome67: true,
         graalvm: true,
       },
@@ -2083,6 +2099,7 @@ exports.tests = [
       */},
       res: {
         firefox52: false,
+        firefox68: firefox.nightly,
         chrome67: true,
         graalvm: true,
       },
@@ -2097,6 +2114,7 @@ exports.tests = [
       */},
       res: {
         firefox52: false,
+        firefox68: firefox.nightly,
         chrome67: true,
         graalvm: true,
       },
@@ -2104,10 +2122,15 @@ exports.tests = [
     {
       name: 'DataView.prototype.getBigInt64',
       exec: function () {/*
-        return typeof DataView.prototype.getBigInt64 === 'function';
+        var buffer = new ArrayBuffer(64);
+        var view = new DataView(buffer);
+        view.setBigInt64(0, 1n);
+        return view.getBigInt64(0) === 1n;
       */},
       res: {
         firefox52: false,
+        firefox67: firefox.bigint,
+        firefox68: firefox.nightly,
         chrome67: true,
         graalvm: true,
       },
@@ -2115,10 +2138,15 @@ exports.tests = [
     {
       name: 'DataView.prototype.getBigUint64',
       exec: function () {/*
-        return typeof DataView.prototype.getBigUint64 === 'function';
+        var buffer = new ArrayBuffer(64);
+        var view = new DataView(buffer);
+        view.setBigUint64(0, 1n);
+        return view.getBigUint64(0) === 1n;
       */},
       res: {
         firefox52: false,
+        firefox67: firefox.bigint,
+        firefox68: firefox.nightly,
         chrome67: true,
         graalvm: true,
       },
@@ -2129,7 +2157,7 @@ exports.tests = [
   name: 'String.prototype.replaceAll',
   significance: 'small',
   spec: 'https://github.com/tc39/proposal-string-replace-all',
-  category: STAGE1,
+  category: STAGE2,
   exec: function () {/*
     return 'q=query+string+parameters'.replaceAll('+', ' ') === 'q=query string parameters';
   */},
@@ -2152,9 +2180,9 @@ exports.tests = [
     var results = [];
     for (let code of 'a𠮷b'.codePoints()) results.push(code);
     return results.length === 3
-      && results[0] === 97
-      && results[1] === 134071
-      && results[2] === 98;
+      && results[0].codePoint === 97 && results[0].position === 0
+      && results[1].codePoint === 134071 && results[1].position === 1
+      && results[2].codePoint === 98 && results[2].position === 3;
   */},
   res: {
     babel6corejs2: false,
@@ -2804,7 +2832,7 @@ exports.tests = [
 },
 {
   name: 'Promise.allSettled',
-  category: STAGE2,
+  category: STAGE3,
   significance: 'small',
   spec: 'https://github.com/tc39/proposal-promise-allSettled',
   exec: function () {/*
@@ -2881,7 +2909,7 @@ exports.tests = [
 },
 {
   name: 'Promise.any',
-  category: STAGE0,
+  category: STAGE1,
   significance: 'small',
   spec: 'https://github.com/tc39/proposal-promise-any',
   exec: function () {/*
@@ -2899,6 +2927,71 @@ exports.tests = [
     typescript1corejs2: typescript.fallthrough,
     typescript3_2corejs3: typescript.corejs,
   }
+},
+{
+  name: 'Legacy RegExp features in JavaScript',
+  category: STAGE3,
+  significance: 'small',
+  spec: 'https://github.com/tc39/proposal-regexp-legacy-features',
+  subtests: [
+    {
+      name: 'RegExp "lastMatch"',
+      mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/lastMatch',
+      exec: function () {
+        var re = /\w/;
+        re.exec('x');
+        return RegExp.lastMatch === 'x';
+      },
+      res: {
+        ie7: true,
+        firefox2: true,
+        safari3_1: true,
+        chrome7: true,
+        opera7_5: false,
+        opera10_10: false,
+        opera10_50: true,
+        konq4_4: true,
+        besen: false,
+        rhino1_7: true,
+        phantom: true,
+        android4_0: true,
+        duktape2_0: false,
+        nashorn1_8: true,
+        nashorn9: true,
+        nashorn10: true,
+        graalvm: true,
+      },
+    },
+    {
+      name: 'RegExp.$1-$9',
+      mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/n',
+      exec: function () {
+        for (var i = 1; i < 10; i++) {
+          if (!(('$' + i) in RegExp)) return false;
+        }
+        return true;
+      },
+      res: {
+        ie7: true,
+        firefox2: true,
+        safari3_1: true,
+        chrome7: true,
+        opera7_5: true,
+        opera10_10: true,
+        opera10_50: true,
+        konq4_4: true,
+        besen: false,
+        rhino1_7: true,
+        phantom: true,
+        android4_0: true,
+        duktape2_0: false,
+        nashorn1_8: true,
+        nashorn9: true,
+        nashorn10: true,
+        graalvm: true,
+      },
+    },
+  ]
 },
 ];
 

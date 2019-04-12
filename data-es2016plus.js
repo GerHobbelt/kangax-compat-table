@@ -780,6 +780,42 @@ exports.tests = [
         }
       },
       {
+        name: 'async arrow functions in methods, classes',
+        exec: function () {/*
+          function doSomething(callback) {
+            callback();
+          }
+          class C {
+            a(){
+              doSomething(async () => {
+                await 1;
+                asyncTestPassed();
+              });
+            }
+          };
+          var p = new C().a();
+        */},
+        res: {
+          tr: true,
+          babel6corejs2: babel.regenerator,
+          closure: true,
+          typescript1corejs2: typescript.downlevelIteration,
+          chrome52: chrome.experimental,
+          chrome55: true,
+          ie11: false,
+          edge13: edge.experimental,
+          edge15: true,
+          firefox2: false,
+          firefox52: true,
+          opera10_50: false,
+          safari10: false,
+          safari10_1: false,
+          safari11: true,
+          duktape2_0: false,
+          graalvm: true,
+        }
+      },
+      {
         name: 'async arrow functions',
         exec: function () {/*
           var a = async () => await Promise.resolve("foo");
@@ -2254,6 +2290,7 @@ exports.tests = [
       firefox57: false,
       opera10_50: false,
       chrome51: true,
+      chrome75: false,
       safari10: true,
       safari10_1: true,
       duktape2_0: true,
@@ -2356,7 +2393,11 @@ exports.tests = [
         res: {
           babel6corejs2: true,
           closure: true,
-          closure20181028: false,
+          closure20181028: {
+            val: false,
+            note_id: 'closure-object-assign',
+            note_html: 'Requires native support for <code>Object.assign</code>',
+          },
           typescript2_1corejs2: true,
           jsx: true,
           ie11: false,
@@ -2383,6 +2424,10 @@ exports.tests = [
         res: {
           babel6corejs2: true,
           closure: true,
+          closure20190121: {
+            val: false,
+            note_id: 'closure-object-assign',
+          },
           jsx: true,
           ie11: false,
           firefox2: false,
@@ -2778,6 +2823,7 @@ exports.tests = [
         */},
         res: {
           babel7corejs2: true,
+          closure20190215: true,
           typescript2_5corejs2: true,
           ie11: false,
           firefox2: false,
@@ -2807,6 +2853,7 @@ exports.tests = [
         */},
         res: {
           babel7corejs2: true,
+          closure20190215: true,
           typescript2_5corejs2: true,
           ie11: false,
           firefox2: false,
@@ -2841,6 +2888,7 @@ exports.tests = [
         */},
         res: {
           babel7corejs2: true,
+          closure20190215: true,
           typescript2_5corejs2: true,
           ie11: false,
           firefox2: false,
@@ -2873,6 +2921,7 @@ exports.tests = [
         res : {
           babel6corejs2: false,
           babel7corejs3: babel.corejs,
+          closure20190301: true,
           typescript1corejs2: typescript.fallthrough,
           typescript3_2corejs3: typescript.corejs,
           ie11: false,
@@ -2895,6 +2944,7 @@ exports.tests = [
         res : {
           babel6corejs2: false,
           babel7corejs3: babel.corejs,
+          closure20190301: true,
           typescript1corejs2: typescript.fallthrough,
           typescript3_2corejs3: typescript.corejs,
           ie11: false,
@@ -3083,6 +3133,7 @@ exports.tests = [
           return eval("'\u2028'") === "\u2028";
         */},
         res : {
+          closure20190215: true,
           ie11: false,
           firefox2: false,
           firefox61: false,
@@ -3099,6 +3150,7 @@ exports.tests = [
           return eval("'\u2029'") === "\u2029";
         */},
         res : {
+          closure20190215: true,
           ie11: false,
           firefox2: false,
           firefox61: false,
@@ -3124,6 +3176,7 @@ exports.tests = [
     res: {
       babel6corejs2: false,
       babel7corejs3: babel.corejs,
+      closure20190325: true,
       typescript1corejs2: typescript.fallthrough,
       typescript3_2corejs3: typescript.corejs,
       firefox52: false,
@@ -3132,7 +3185,7 @@ exports.tests = [
       safari12_1: true,
       safaritp: true,
       graalvm: false,
-      chrome73: chrome.harmony,
+      chrome73: true,
       chrome74: true,
     }
   },
@@ -3248,6 +3301,11 @@ exports.tests = [
       */},
         res: {
           babel6corejs2: babel.corejs,
+          closure20190325: {
+            val: false,
+            note_id: 'closure-string-trimstart',
+            note_html: 'Requires native support for String.prototype.trimLeft.',
+          },
           typescript1corejs2: typescript.corejs,
           ie11: false,
           firefox2: false,
@@ -3269,6 +3327,11 @@ exports.tests = [
       */},
         res: {
           babel6corejs2: babel.corejs,
+          closure20190325: {
+            val: false,
+            note_id: 'closure-string-trimend',
+            note_html: 'Requires native support for String.prototype.trimRight.',
+          },
           typescript1corejs2: typescript.corejs,
           ie11: false,
           firefox2: false,
@@ -3305,6 +3368,7 @@ exports.tests = [
         res: {
           babel6corejs2: false,
           babel7corejs3: babel.corejs,
+          closure20190301: true,
           typescript1corejs2: typescript.fallthrough,
           typescript3_2corejs3: typescript.corejs,
           ie11: false,
@@ -3334,6 +3398,7 @@ exports.tests = [
       */},
         res: {
           babel6corejs2: babel.corejs,
+          closure20190301: true,
           typescript1corejs2: typescript.corejs,
           ie11: false,
           firefox2: false,
@@ -3363,7 +3428,10 @@ exports.tests = [
           firefox58: false,
           firefox59: false,
           firefox62: false,
+          firefox67: true,
           chrome69: false,
+          chrome73: true,
+          chrome74: true,
           opera10_50: false,
           safari12: false,
           duktape2_2: false,
@@ -3372,11 +3440,46 @@ exports.tests = [
       },
     ]
   },
+  {
+    name: 'String.prototype.matchAll',
+    category: '2020 features',
+    significance: 'small',
+    spec: 'https://github.com/tc39/String.prototype.matchAll',
+    exec: function(){/*
+      var iterator = '11a2bb'.matchAll(/(\d)(\D)/g);
+      if(iterator[Symbol.iterator]() !== iterator)return false;
+      var a = '', b = '', c = '', step;
+      while(!(step = iterator.next()).done){
+        a += step.value[0];
+        b += step.value[1];
+        c += step.value[2];
+      }
+      return a === '1a2b'
+        && b === '12'
+        && c === 'ab';
+    */},
+    res: {
+      babel6corejs2: babel.corejs,
+      typescript1corejs2: typescript.corejs,
+      ie11: false,
+      firefox2: false,
+      firefox65: false,
+      firefox66: firefox.nightly,
+      firefox67: true,
+      chrome67: false,
+      chrome68: chrome.harmony,
+      chrome73: true,
+      chrome74: true,
+      opera10_50: false,
+      duktape2_0: false,
+      graalvm: true,
+    }
+  },
 ];
 
 //Shift annex B features to the bottom
 exports.tests = exports.tests.reduce(function(a,e) {
-  var index = ['2016 features', '2016 misc', '2017 features', '2017 misc', '2017 annex b', '2018 features', '2018 misc', '2019 features', '2019 misc', 'finished (stage 4)'].indexOf(e.category);
+  var index = ['2016 features', '2016 misc', '2017 features', '2017 misc', '2017 annex b', '2018 features', '2018 misc', '2019 features', '2019 misc', '2020 features', 'finished (stage 4)'].indexOf(e.category);
   if (index === -1) {
     console.log('"' + a.category + '" is not an ES2016+ category!');
   }

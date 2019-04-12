@@ -2292,6 +2292,7 @@ exports.tests = [
       */},
       res: {
         tr: true,
+        babel7corejs3: babel.corejs,
         typescript1corejs2: typescript.notDownlevelIteration,
         es6tr: true,
         edge12: true,
@@ -5449,6 +5450,48 @@ exports.tests = [
         edge12: true,
         chrome41: true,
         safari9: true,
+        node4: true,
+        xs6: true,
+        jxa: true,
+        duktape2_0: false,
+        nashorn9: true,
+        nashorn10: true,
+        graalvm: true,
+      },
+    },
+    {
+      name: 'TemplateStrings call site caching',
+      exec: function () {/*
+        // Safari 12 sometimes garbage collects the cached TemplateStrings,
+        // even when the call site is still alive.
+        // This is almost impossible to write a test case for, but we can test
+        // the general semantics.
+        // https://bugs.webkit.org/show_bug.cgi?id=190756
+        function strings(array) {
+          return array;
+        }
+        function getStrings() {
+          return strings`foo`;
+        }
+        var original = getStrings();
+        var other = strings`foo`;
+        return original === getStrings() && original !== other;
+      */},
+      res: {
+        tr: true,
+        babel6corejs2: true,
+        es6tr: true,
+        jsx: true,
+        ejs: true,
+        closure: true,
+        typescript1corejs2: true,
+        edge12: true,
+        firefox2: false,
+        firefox34: true,
+        opera10_50: false,
+        chrome41: true,
+        safari9: true,
+        safari12: false,
         node4: true,
         xs6: true,
         jxa: true,
@@ -11639,6 +11682,7 @@ exports.tests = [
       res: {
         babel6corejs2: babel.corejs,
         closure: true,
+        closure20190301: false,
         typescript1corejs2: typescript.corejs,
         ejs: true,
         es6shim: true,
@@ -16079,6 +16123,7 @@ exports.tests = [
       res: {
         tr: true,
         babel6corejs2: babel.corejs,
+        closure20190301: true,
         typescript1corejs2: typescript.corejs,
         edge12: true,
         firefox2: false,
@@ -18669,6 +18714,7 @@ exports.tests = [
       res: {
         ejs: true,
         babel6corejs2: babel.corejs,
+        closure20190215: true,
         typescript1corejs2: typescript.corejs,
         tr: true,
         es6shim: true,
@@ -19835,6 +19881,7 @@ exports.tests = [
       res: {
         babel6corejs2: babel.corejs,
         closure: true,
+        closure20190301: false,
         typescript1corejs2: typescript.corejs,
         es6shim: true,
         edge12: true,
