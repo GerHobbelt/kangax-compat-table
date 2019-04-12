@@ -1,7 +1,7 @@
 {
   "name": "@gerhobbelt/kangax-compat-table",
   "version": "1.0.0-6",
-  "main": "node.js",
+  "main": "nodetest.js",
   "engine": {
     "node": ">= 0.11.12",
     "npm": ">= 3.0"
@@ -44,7 +44,8 @@
     "build:compilers": "node build.js compilers",
     "git:clean": "if type git > /dev/null 2>&1; then git stash save --keep-index; fi",
     "test:no_change": "npm run --silent git:clean && if npm run --silent build | grep 'Write to file'; then echo 'Please run `npm run build` and commit the changes.' && exit 1; fi",
-    "graalvm": "node --jvm --shared-array-buffer --intl-402 node.js",
+    "test": "node ./",
+    "graalvm": "node --jvm --shared-array-buffer --intl-402 nodetest.js",
     "pub": "npm publish --access public"
   },
   "config": {
