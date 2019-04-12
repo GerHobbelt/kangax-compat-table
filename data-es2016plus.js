@@ -599,7 +599,7 @@ exports.tests = [
           opera10_50: false,
           safari10_1: true,
           duktape2_0: false,
-          graalvm: false,
+          graalvm: true,
         }
       },
       {
@@ -631,7 +631,7 @@ exports.tests = [
           opera10_50: false,
           safari10_1: true,
           duktape2_0: false,
-          graalvm: false,
+          graalvm: true,
         }
       },
       {
@@ -2790,7 +2790,7 @@ exports.tests = [
           safaritp: true,
           webkit: true,
           duktape2_2: false,
-          graalvm: false,
+          graalvm: true,
         },
       },
       {
@@ -2819,7 +2819,7 @@ exports.tests = [
           safaritp: true,
           webkit: true,
           duktape2_2: false,
-          graalvm: false,
+          graalvm: true,
         },
       },
       {
@@ -2853,7 +2853,7 @@ exports.tests = [
           safaritp: true,
           webkit: true,
           duktape2_2: false,
-          graalvm: false,
+          graalvm: true,
         }
       }
     ]
@@ -2884,7 +2884,7 @@ exports.tests = [
           safari11: false,
           safari12: true,
           safaritp: true,
-          graalvm: false,
+          graalvm: true,
         },
       },
       {
@@ -2906,13 +2906,14 @@ exports.tests = [
           safari11: false,
           safari12: true,
           safaritp: true,
-          graalvm: false,
+          graalvm: true,
         },
       },
       {
         name: 'undefined description',
         exec: function(){/*
-          return Symbol().description === undefined;
+          return Symbol.prototype.hasOwnProperty('description')
+            && Symbol().description === undefined;
         */},
         res : {
           babel6corejs2: false,
@@ -2927,7 +2928,9 @@ exports.tests = [
           chrome70: true,
           safari11: false,
           safari12: false,
-          graalvm: false,
+          safari12_1: true,
+          safaritp: true,
+          graalvm: true,
         },
       },
     ]
@@ -3068,7 +3071,307 @@ exports.tests = [
       },
     }]
   },
-
+  {
+    name: 'JSON superset',
+    spec: 'https://github.com/tc39/proposal-json-superset',
+    category: '2019 misc',
+    significance: 'small',
+    subtests: [
+      {
+        name: 'LINE SEPARATOR can appear in string literals',
+        exec: function(){/*
+          return eval("'\u2028'") === "\u2028";
+        */},
+        res : {
+          ie11: false,
+          firefox2: false,
+          firefox61: false,
+          firefox62: true,
+          chrome65: false,
+          chrome66: true,
+          safari11: false,
+          safari12: true,
+        },
+      },
+      {
+        name: 'PARAGRAPH SEPARATOR can appear in string literals',
+        exec: function(){/*
+          return eval("'\u2029'") === "\u2029";
+        */},
+        res : {
+          ie11: false,
+          firefox2: false,
+          firefox61: false,
+          firefox62: true,
+          chrome65: false,
+          chrome66: true,
+          safari11: false,
+          safari12: true,
+        },
+      },
+    ]
+  },
+  {
+    name: 'Object.fromEntries',
+    significance: 'small',
+    spec: 'https://github.com/tc39/proposal-object-from-entries',
+    mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries',
+    category: '2019 features',
+    exec: function () {/*
+    var object = Object.fromEntries(new Map([['foo', 42], ['bar', 23]]));
+    return object.foo === 42 && object.bar === 23;
+  */},
+    res: {
+      babel6corejs2: false,
+      babel7corejs3: babel.corejs,
+      typescript1corejs2: typescript.fallthrough,
+      typescript3_2corejs3: typescript.corejs,
+      firefox52: false,
+      firefox62: false,
+      firefox63: true,
+      safari12_1: true,
+      safaritp: true,
+      graalvm: false,
+      chrome73: chrome.harmony,
+      chrome74: true,
+    }
+  },
+  {
+    name: 'Well-formed JSON.stringify',
+    spec: 'https://github.com/tc39/proposal-well-formed-stringify',
+    category: '2019 misc',
+    significance: 'small',
+    exec: function () {/*
+    return JSON.stringify('\uDF06\uD834') === "\"\\udf06\\ud834\""
+      && JSON.stringify('\uDEAD') === "\"\\udead\"";
+  */},
+    res: {
+      ie11: false,
+      edge16: false,
+      firefox52: false,
+      firefox63: false,
+      firefox64: true,
+      chrome70: false,
+      chrome71: false,
+      chrome72: true,
+      safari1: false,
+      safari12_1: true,
+      safaritp: true,
+      graalvm: true,
+    }
+  },
+  {
+    name: 'string trimming',
+    category: '2019 features',
+    significance: 'small',
+    spec: 'https://github.com/tc39/proposal-string-left-right-trim',
+    subtests: [
+      {
+        name: 'String.prototype.trimLeft',
+        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/TrimLeft',
+        exec: function(){/*
+        return ' \t \n abc   \t\n'.trimLeft() === 'abc   \t\n';
+      */},
+        res: {
+          babel6corejs2: babel.corejs,
+          typescript1corejs2: typescript.corejs,
+          ie11: false,
+          edge12: true,
+          firefox2: false,
+          firefox3_5: true,
+          firefox3_6: true,
+          firefox4: true,
+          chrome7: true,
+          opera10_10: false,
+          konq4_4: false,
+          konq4_9: true,
+          besen: false,
+          rhino1_7: false,
+          phantom: true,
+          node0_12: true,
+          safari3: false,
+          safari4: true,
+          safari12: true,
+          webkit: true,
+          es7shim: true,
+          android4_0: true,
+          ios5_1: true,
+          duktape2_0: false,
+          nashorn1_8: true,
+          nashorn9: true,
+          nashorn10: true,
+          graalvm: true,
+        }
+      },
+      {
+        name: 'String.prototype.trimRight',
+        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/TrimRight',
+        exec: function(){/*
+        return ' \t \n abc   \t\n'.trimRight() === ' \t \n abc';
+      */},
+        res: {
+          babel6corejs2: babel.corejs,
+          typescript1corejs2: typescript.corejs,
+          ie11: false,
+          edge12: true,
+          firefox2: false,
+          firefox3_5: true,
+          firefox3_6: true,
+          firefox4: true,
+          chrome7: true,
+          opera10_10: false,
+          konq4_4: false,
+          konq4_9: true,
+          besen: false,
+          rhino1_7: false,
+          phantom: true,
+          node0_12: true,
+          safari3: false,
+          safari4: true,
+          safari12: true,
+          webkit: true,
+          es7shim: true,
+          android4_0: true,
+          ios5_1: true,
+          duktape2_0: false,
+          nashorn1_8: true,
+          nashorn9: true,
+          nashorn10: true,
+          graalvm: true,
+        }
+      },
+      {
+        name: 'String.prototype.trimStart',
+        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trimStart',
+        exec: function(){/*
+        return ' \t \n abc   \t\n'.trimStart() === 'abc   \t\n';
+      */},
+        res: {
+          babel6corejs2: babel.corejs,
+          typescript1corejs2: typescript.corejs,
+          ie11: false,
+          firefox2: false,
+          firefox59: false,
+          firefox60: firefox.nightly,
+          firefox61: true,
+          chrome66: true,
+          opera10_50: false,
+          safari12: true,
+          duktape2_0: false,
+          graalvm: true,
+        }
+      },
+      {
+        name: 'String.prototype.trimEnd',
+        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trimEnd',
+        exec: function(){/*
+        return ' \t \n abc   \t\n'.trimEnd() === ' \t \n abc';
+      */},
+        res: {
+          babel6corejs2: babel.corejs,
+          typescript1corejs2: typescript.corejs,
+          ie11: false,
+          firefox2: false,
+          firefox59: false,
+          firefox60: firefox.nightly,
+          firefox61: true,
+          chrome66: true,
+          opera10_50: false,
+          safari12: true,
+          duktape2_0: false,
+          graalvm: true,
+        }
+      }
+    ]
+  },
+  {
+    name: 'Array.prototype.{flat, flatMap}',
+    category: '2019 features',
+    significance: 'medium',
+    spec: 'https://tc39.github.io/proposal-flatMap/',
+    links: [
+      {
+        note_id: 'flatten-compat-issue',
+        note_html: 'Name of <code>Array.prototype.flatten()</code> changed to <code>Array.prototype.flat()</code> due to <a href="https://github.com/tc39/proposal-flatMap/pull/56">web compatibility issues.</a>',
+      }
+    ],
+    subtests: [
+      {
+        name: 'Array.prototype.flat',
+        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat',
+        exec: function(){/*
+        return [1, [2, 3], [4, [5, 6]]].flat().join('') === '12345,6';
+      */},
+        res: {
+          babel6corejs2: false,
+          babel7corejs3: babel.corejs,
+          typescript1corejs2: typescript.fallthrough,
+          typescript3_2corejs3: typescript.corejs,
+          ie11: false,
+          firefox2: false,
+          firefox58: false,
+          firefox59: {
+            val: false,
+            note_id: 'ffox-flatten',
+            note_html: 'Older Firefox Nightly builds support only the obsolete draft function name <code>Array.prototype.flatten()</code>.'
+          },
+          firefox62: true,
+          chrome69: true,
+          opera10_50: false,
+          safari12: true,
+          safaritp: true,
+          duktape2_2: false,
+          graalvm: true,
+        }
+      },
+      {
+        name: 'Array.prototype.flatMap',
+        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flatMap',
+        exec: function(){/*
+        return [{a: 1, b: 2}, {a: 3, b: 4}].flatMap(function (it) {
+          return [it.a, it.b];
+        }).join('') === '1234';
+      */},
+        res: {
+          babel6corejs2: babel.corejs,
+          typescript1corejs2: typescript.corejs,
+          ie11: false,
+          firefox2: false,
+          firefox58: false,
+          firefox59: firefox.nightly,
+          firefox62: true,
+          chrome69: true,
+          opera10_50: false,
+          safari12: true,
+          duktape2_2: false,
+          graalvm: true,
+        }
+      },
+      {
+        name: 'flat and flatMap in Array.prototype[@@unscopables]',
+        exec: function(){/*
+        return Array.prototype[Symbol.unscopables].flat
+          && Array.prototype[Symbol.unscopables].flatMap;
+      */},
+        res: {
+          babel6corejs2: false,
+          babel7corejs3: babel.corejs,
+          typescript1corejs2: typescript.fallthrough,
+          typescript3_2corejs3: typescript.corejs,
+          ie11: false,
+          firefox2: false,
+          firefox58: false,
+          firefox59: false,
+          firefox62: false,
+          chrome69: false,
+          opera10_50: false,
+          safari12: false,
+          duktape2_2: false,
+          graalvm: false,
+        }
+      },
+    ]
+  },
 ];
 
 //Shift annex B features to the bottom

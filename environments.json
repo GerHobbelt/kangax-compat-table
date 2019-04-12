@@ -181,6 +181,30 @@
     "short": "Closure 2018.11",
     "family": "Closure",
     "platformtype": "compiler",
+    "obsolete": true,
+    "test_suites": [
+      "es6",
+      "es2016plus",
+      "esnext"
+    ]
+  },
+  "closure20181210": {
+    "full": "Closure Compiler v20181210",
+    "short": "Closure 2018.12",
+    "family": "Closure",
+    "platformtype": "compiler",
+    "obsolete": true,
+    "test_suites": [
+      "es6",
+      "es2016plus",
+      "esnext"
+    ]
+  },
+  "closure20190106": {
+    "full": "Closure Compiler v20190106",
+    "short": "Closure 2019.01",
+    "family": "Closure",
+    "platformtype": "compiler",
     "obsolete": false,
     "test_suites": [
       "es6",
@@ -1090,7 +1114,7 @@
     "short": "FF 57",
     "release": "2017-11-14",
     "retire": "2018-01-16",
-    "obsolete": true
+    "obsolete": "very"
   },
   "firefox58": {
     "full": "Firefox 58",
@@ -1138,7 +1162,7 @@
     "short": "FF 63",
     "release": "2018-10-23",
     "retire": "2018-12-11",
-    "obsolete": false
+    "obsolete": true
   },
   "firefox64": {
     "full": "Firefox 64",
@@ -1149,19 +1173,27 @@
     "obsolete": false
   },
   "firefox65": {
-    "full": "Firefox 65 Beta",
+    "full": "Firefox 65",
     "family": "SpiderMonkey",
-    "short": "FF 65 Beta",
+    "short": "FF 65",
     "release": "2019-01-29",
     "retire": "2019-03-19",
-    "unstable": true
+    "obsolete": false
   },
   "firefox66": {
-    "full": "Firefox 66 Nightly",
+    "full": "Firefox 66 Beta",
     "family": "SpiderMonkey",
-    "short": "FF 66 Nightly",
+    "short": "FF 66 Beta",
     "release": "2019-03-19",
     "retire": "2019-05-14",
+    "unstable": true
+  },
+  "firefox67": {
+    "full": "Firefox 67 Nightly",
+    "family": "SpiderMonkey",
+    "short": "FF 67 Nightly",
+    "release": "2019-05-14",
+    "retire": "2019-07-09",
     "unstable": true
   },
   "opera7": {
@@ -1868,7 +1900,7 @@
     "short": "CH&nbsp;63,<br>OP&nbsp;50",
     "release": "2017-12-05",
     "retire": "2018-01-24",
-    "obsolete": true
+    "obsolete": "very"
   },
   "chrome64": {
     "full": "Chrome",
@@ -1924,7 +1956,7 @@
     "short": "CH&nbsp;70,<br>OP&nbsp;57",
     "release": "2018-10-16",
     "retire": "2018-12-04",
-    "obsolete": false
+    "obsolete": true
   },
   "chrome71": {
     "full": "Chrome",
@@ -1934,16 +1966,23 @@
     "obsolete": false
   },
   "chrome72": {
-    "full": "Chrome Beta",
+    "full": "Chrome",
     "family": "V8",
     "short": "CH&nbsp;72,<br>OP&nbsp;59",
     "release": "2019-01-29",
-    "unstable": true
+    "obsolete": false
   },
   "chrome73": {
-    "full": "Chrome Canary",
+    "full": "Chrome Beta",
     "family": "V8",
     "short": "CH&nbsp;73,<br>OP&nbsp;60",
+    "release": "2019-03-12",
+    "unstable": true
+  },
+  "chrome74": {
+    "full": "Chrome Canary",
+    "family": "V8",
+    "short": "CH&nbsp;74,<br>OP&nbsp;61",
     "unstable": true
   },
   "safari1": {
@@ -2100,11 +2139,17 @@
     "release": "2018-09-17",
     "obsolete": false
   },
+  "safari12_1": {
+    "full": "Safari 12.1 Beta",
+    "family": "JavaScriptCore",
+    "short": "SF&nbsp;12.1<br>Beta",
+    "unstable": true
+  },
   "safaritp": {
-    "full": "Safari Technology Preview Release 65",
+    "full": "Safari Technology Preview Release 73",
     "family": "JavaScriptCore",
     "short": "SF TP",
-    "release": "2018-09-10",
+    "release": "2019-01-09",
     "unstable": true
   },
   "webkit": {
@@ -2485,15 +2530,69 @@
       "non-standard"
     ]
   },
-  "node10_13": {
+  "node10_0": {
     "full": "Node.js",
     "family": "Node.js",
-    "short": "Node &gt;=10.13 &lt;11",
+    "short": "Node &gt;=10.0 &lt;10.4",
+    "platformtype": "engine",
+    "note_id": "harmony-flag",
+    "equals": "chrome66",
+    "release": "2018-04-24",
+    "obsolete": true,
+    "test_suites": [
+      "es5",
+      "es6",
+      "es2016plus",
+      "esnext",
+      "esintl",
+      "non-standard"
+    ]
+  },
+  "node10_4": {
+    "full": "Node.js",
+    "family": "Node.js",
+    "short": "Node &gt;=10.4 &lt;10.9",
+    "platformtype": "engine",
+    "note_id": "harmony-flag",
+    "equals": "chrome67",
+    "release": "2018-06-06",
+    "obsolete": true,
+    "test_suites": [
+      "es5",
+      "es6",
+      "es2016plus",
+      "esnext",
+      "esintl",
+      "non-standard"
+    ]
+  },
+  "node10_9": {
+    "full": "Node.js",
+    "family": "Node.js",
+    "short": "Node &gt;=10.9 &lt;11",
     "platformtype": "engine",
     "note_id": "harmony-flag",
     "equals": "chrome68",
-    "release": "2018-10-30",
-    "unstable": false,
+    "release": "2018-08-15",
+    "obsolete": false,
+    "test_suites": [
+      "es5",
+      "es6",
+      "es2016plus",
+      "esnext",
+      "esintl",
+      "non-standard"
+    ]
+  },
+  "node11_0": {
+    "full": "Node.js",
+    "family": "Node.js",
+    "short": "Node &gt;=11",
+    "platformtype": "engine",
+    "note_id": "harmony-flag",
+    "equals": "chrome70",
+    "release": "2018-10-23",
+    "obsolete": false,
     "test_suites": [
       "es5",
       "es6",
@@ -2642,6 +2741,14 @@
     "family": "Duktape",
     "short": "DUK 2.2",
     "platformtype": "engine",
+    "release": "2018-08-04",
+    "obsolete": true
+  },
+  "duktape2_3": {
+    "full": "Duktape 2.3",
+    "family": "Duktape",
+    "short": "DUK 2.3",
+    "platformtype": "engine",
     "release": "2017-09-23",
     "obsolete": false
   },
@@ -2682,13 +2789,13 @@
     ]
   },
   "graalvm": {
-    "full": "GraalVM JavaScript 1.0.0 RC3",
+    "full": "GraalVM JavaScript 1.0.0 RC10",
     "family": "GraalVM 1.0",
     "short": "GraalVM 1.0",
     "platformtype": "engine",
     "note_id": "graalvm-node-mode",
     "note_html": "Executed in Node.js/JVM mode via <code>graalvm/bin/node --jvm</code>.",
-    "release": "2018-07-01",
+    "release": "2018-12-05",
     "unstable": false,
     "test_suites": [
       "es5",

@@ -169,130 +169,6 @@ exports.tests = [
   }
 },
 {
-  name: 'string trimming',
-  category: STAGE3,
-  significance: 'small',
-  spec: 'https://github.com/tc39/proposal-string-left-right-trim',
-  subtests: [
-    {
-      name: 'String.prototype.trimLeft',
-      mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/TrimLeft',
-      exec: function(){/*
-        return ' \t \n abc   \t\n'.trimLeft() === 'abc   \t\n';
-      */},
-      res: {
-        babel6corejs2: babel.corejs,
-        typescript1corejs2: typescript.corejs,
-        ie11: false,
-        edge12: true,
-        firefox2: false,
-        firefox3_5: true,
-        firefox3_6: true,
-        firefox4: true,
-        chrome7: true,
-        opera10_10: false,
-        konq4_4: false,
-        konq4_9: true,
-        besen: false,
-        rhino1_7: false,
-        phantom: true,
-        node0_12: true,
-        safari3: false,
-        safari4: true,
-        safari12: true,
-        webkit: true,
-        es7shim: true,
-        android4_0: true,
-        ios5_1: true,
-        duktape2_0: false,
-        nashorn1_8: true,
-        nashorn9: true,
-        nashorn10: true,
-        graalvm: true,
-      }
-    },
-    {
-      name: 'String.prototype.trimRight',
-      mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/TrimRight',
-      exec: function(){/*
-        return ' \t \n abc   \t\n'.trimRight() === ' \t \n abc';
-      */},
-      res: {
-        babel6corejs2: babel.corejs,
-        typescript1corejs2: typescript.corejs,
-        ie11: false,
-        edge12: true,
-        firefox2: false,
-        firefox3_5: true,
-        firefox3_6: true,
-        firefox4: true,
-        chrome7: true,
-        opera10_10: false,
-        konq4_4: false,
-        konq4_9: true,
-        besen: false,
-        rhino1_7: false,
-        phantom: true,
-        node0_12: true,
-        safari3: false,
-        safari4: true,
-        safari12: true,
-        webkit: true,
-        es7shim: true,
-        android4_0: true,
-        ios5_1: true,
-        duktape2_0: false,
-        nashorn1_8: true,
-        nashorn9: true,
-        nashorn10: true,
-        graalvm: true,
-      }
-    },
-    {
-      name: 'String.prototype.trimStart',
-      mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trimStart',
-      exec: function(){/*
-        return ' \t \n abc   \t\n'.trimStart() === 'abc   \t\n';
-      */},
-      res: {
-        babel6corejs2: babel.corejs,
-        typescript1corejs2: typescript.corejs,
-        ie11: false,
-        firefox2: false,
-        firefox59: false,
-        firefox60: firefox.nightly,
-        firefox61: true,
-        chrome66: true,
-        opera10_50: false,
-        safari12: true,
-        duktape2_0: false,
-        graalvm: true,
-      }
-    },
-    {
-      name: 'String.prototype.trimEnd',
-      mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trimEnd',
-      exec: function(){/*
-        return ' \t \n abc   \t\n'.trimEnd() === ' \t \n abc';
-      */},
-      res: {
-        babel6corejs2: babel.corejs,
-        typescript1corejs2: typescript.corejs,
-        ie11: false,
-        firefox2: false,
-        firefox59: false,
-        firefox60: firefox.nightly,
-        firefox61: true,
-        chrome66: true,
-        opera10_50: false,
-        safari12: true,
-        duktape2_0: false,
-        graalvm: true,
-      }
-    }
-  ]
-},
-{
   name: 'globalThis',
   category: STAGE3,
   significance: 'small',
@@ -317,8 +193,8 @@ exports.tests = [
       chrome71: true,
       opera10_50: false,
       safari10_1: false,
-      safaritp: false,
-      webkit: false,
+      safari12_1: true,
+      safaritp: true,
       node0_10: false,
       node0_12: false,
       node4: false,
@@ -331,7 +207,7 @@ exports.tests = [
       node8_7: false,
       duktape2_0: false,
       duktape2_1: false,
-      graalvm: false,
+      graalvm: true,
     }
   }, {
     name: '"globalThis" global property has correct property descriptor',
@@ -356,9 +232,9 @@ exports.tests = [
       chrome70: chrome.experimental,
       chrome71: true,
       opera10_50: false,
-      safaritp: false,
       safari10_1: false,
-      webkit: false,
+      safari12_1: true,
+      safaritp: true,
       node0_10: false,
       node0_12: false,
       node4: false,
@@ -371,7 +247,7 @@ exports.tests = [
       node8_7: false,
       duktape2_0: false,
       duktape2_1: false,
-      graalvm: false,
+      graalvm: true,
     }
   }]
 },
@@ -526,9 +402,10 @@ exports.tests = [
     firefox66: firefox.nightly,
     chrome67: false,
     chrome68: chrome.harmony,
+    chrome74: true,
     opera10_50: false,
     duktape2_0: false,
-    graalvm: false,
+    graalvm: true,
   }
 },
 {
@@ -1064,6 +941,7 @@ exports.tests = [
       */},
       res: {
         firefox2: false,
+        chrome74: chrome.harmony,
         opera10_50: false,
         duktape2_0: false,
         graalvm: false,
@@ -1397,71 +1275,6 @@ exports.tests = [
         firefox2: false,
         firefox52: false,
         opera10_50: false,
-        duktape2_2: false,
-        graalvm: false,
-      }
-    }
-  ]
-},
-{
-  name: 'Array.prototype.{flat, flatMap}',
-  category: STAGE3,
-  significance: 'medium',
-  spec: 'https://tc39.github.io/proposal-flatMap/',
-  links: [
-    {
-      note_id: 'flatten-compat-issue',
-      note_html: 'Name of <code>Array.prototype.flatten()</code> changed to <code>Array.prototype.flat()</code> due to <a href="https://github.com/tc39/proposal-flatMap/pull/56">web compatibility issues.</a>',
-    }
-  ],
-  subtests: [
-    {
-      name: 'Array.prototype.flat',
-      mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat',
-      exec: function(){/*
-        return [1, [2, 3], [4, [5, 6]]].flat().join('') === '12345,6';
-      */},
-      res: {
-        babel6corejs2: false,
-        babel7corejs3: babel.corejs,
-        typescript1corejs2: typescript.fallthrough,
-        typescript3_2corejs3: typescript.corejs,
-        ie11: false,
-        firefox2: false,
-        firefox58: false,
-        firefox59: {
-          val: false,
-          note_id: 'ffox-flatten',
-          note_html: 'Older Firefox Nightly builds support only the obsolete draft function name <code>Array.prototype.flatten()</code>.'
-        },
-        firefox62: true,
-        chrome69: true,
-        opera10_50: false,
-        safari12: true,
-        safaritp: true,
-        duktape2_2: false,
-        graalvm: false,
-      }
-    },
-    {
-      name: 'Array.prototype.flatMap',
-      mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flatMap',
-      exec: function(){/*
-        return [{a: 1, b: 2}, {a: 3, b: 4}].flatMap(function (it) {
-          return [it.a, it.b];
-        }).join('') === '1234';
-      */},
-      res: {
-        babel6corejs2: babel.corejs,
-        typescript1corejs2: typescript.corejs,
-        ie11: false,
-        firefox2: false,
-        firefox58: false,
-        firefox59: firefox.nightly,
-        firefox62: true,
-        chrome69: true,
-        opera10_50: false,
-        safari12: true,
         duktape2_2: false,
         graalvm: false,
       }
@@ -2271,7 +2084,7 @@ exports.tests = [
       res: {
         firefox52: false,
         chrome67: true,
-        graalvm: false,
+        graalvm: true,
       },
     },
     {
@@ -2285,7 +2098,7 @@ exports.tests = [
       res: {
         firefox52: false,
         chrome67: true,
-        graalvm: false,
+        graalvm: true,
       },
     },
     {
@@ -2296,7 +2109,7 @@ exports.tests = [
       res: {
         firefox52: false,
         chrome67: true,
-        graalvm: false,
+        graalvm: true,
       },
     },
     {
@@ -2307,7 +2120,7 @@ exports.tests = [
       res: {
         firefox52: false,
         chrome67: true,
-        graalvm: false,
+        graalvm: true,
       },
     },
   ],
@@ -2351,29 +2164,6 @@ exports.tests = [
     ie11: false,
     firefox52: false,
     graalvm: false,
-  }
-},
-{
-  name: 'Object.fromEntries',
-  significance: 'small',
-  spec: 'https://github.com/tc39/proposal-object-from-entries',
-  mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries',
-  category: STAGE3,
-  exec: function () {/*
-    var object = Object.fromEntries(new Map([['foo', 42], ['bar', 23]]));
-    return object.foo === 42 && object.bar === 23;
-  */},
-  res: {
-    babel6corejs2: false,
-    babel7corejs3: babel.corejs,
-    typescript1corejs2: typescript.fallthrough,
-    typescript3_2corejs3: typescript.corejs,
-    firefox52: false,
-    firefox62: false,
-    firefox63: true,
-    safaritp: true,
-    graalvm: false,
-    chrome73: chrome.harmony,
   }
 },
 {
@@ -2488,9 +2278,9 @@ exports.tests = [
       }
     },
     {
-      name: 'Set.prototype.isDisjointWith',
+      name: 'Set.prototype.isDisjointFrom',
       exec: function () {/*
-        return new Set([1, 2, 3]).isDisjointWith([4, 5, 6]);
+        return new Set([1, 2, 3]).isDisjointFrom([4, 5, 6]);
       */},
       res: {
         babel6corejs2: false,
@@ -2975,26 +2765,6 @@ exports.tests = [
   ]
 },
 {
-  name: 'Well-formed JSON.stringify',
-  spec: 'https://github.com/tc39/proposal-well-formed-stringify',
-  category: STAGE3,
-  significance: 'small',
-  exec: function () {/*
-    return JSON.stringify('\uDF06\uD834') === "\"\\udf06\\ud834\""
-      && JSON.stringify('\uDEAD') === "\"\\udead\"";
-  */},
-  res: {
-    ie11: false,
-    edge16: false,
-    firefox52: false,
-    firefox63: false,
-    firefox64: true,
-    chrome70: false,
-    chrome71: false,
-    chrome72: true,
-  }
-},
-{
   name: 'ArrayBuffer.prototype.transfer',
   category: STAGE2,
   significance: 'small',
@@ -3034,7 +2804,7 @@ exports.tests = [
 },
 {
   name: 'Promise.allSettled',
-  category: STAGE1,
+  category: STAGE2,
   significance: 'small',
   spec: 'https://github.com/tc39/proposal-promise-allSettled',
   exec: function () {/*
@@ -3108,6 +2878,27 @@ exports.tests = [
       },
     },
   ]
+},
+{
+  name: 'Promise.any',
+  category: STAGE0,
+  significance: 'small',
+  spec: 'https://github.com/tc39/proposal-promise-any',
+  exec: function () {/*
+    Promise.any([
+      Promise.resolve(1),
+      Promise.reject(2),
+      Promise.resolve(3)
+    ]).then(it => {
+      if (it === 1) asyncTestPassed();
+    });
+  */},
+  res: {
+    babel6corejs2: false,
+    babel7corejs3: babel.corejs,
+    typescript1corejs2: typescript.fallthrough,
+    typescript3_2corejs3: typescript.corejs,
+  }
 },
 ];
 
