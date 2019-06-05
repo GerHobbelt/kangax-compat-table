@@ -1204,7 +1204,7 @@
     "short": "FF 59",
     "release": "2018-03-13",
     "retire": "2018-05-09",
-    "obsolete": "very"
+    "obsolete": true
   },
   "firefox60": {
     "full": "Firefox 60 ESR",

@@ -5775,14 +5775,14 @@ exports.tests = [
       res: {
         babel6corejs2: babel.corejs,
         typescript1corejs2: typescript.corejs,
+        firefox2: false,
+        firefox4: true,
         ie11: {
           val: true,
           note_id: "ie-clampedarray",
           note_html: "A partial implementation of <code>Uint8ClampedArray</code> has been introduced with <a href='https://support.microsoft.com/en-us/help/2929437/description-of-the-security-update-for-internet-explorer-11-on-windows'>KB2929437</a>, so this test fails on early IE11 builds."
         },
         edge12: true,
-        firefox2: false,
-        firefox4: true,
         chrome5: true,
         safari6: true,
         opera10_50: false,
